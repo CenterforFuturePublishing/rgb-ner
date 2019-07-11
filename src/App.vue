@@ -1,6 +1,16 @@
 <template>
   <div id="app">
-    <column></column>
+
+
+    <column :textFromParent="textForChildComponent">
+
+      <h4>html from parent</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi autem et harum, hic, illo ipsam iure, libero officia possimus quae quam quo recusandae sed unde voluptate. Asperiores non reprehenderit soluta.</p>
+
+    </column>
+
+
+
   </div>
 </template>
 
@@ -14,7 +24,9 @@ import Column from "@/components/Column.vue"
     Column,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  textForChildComponent = 'hello from parrent component'
+}
 </script>
 
 <style lang="scss">
