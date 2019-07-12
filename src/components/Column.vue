@@ -1,15 +1,17 @@
 <template>
     <section class="v-column">
 
-        <h3>action sample</h3>
-        <button @click="buttonClicked">click</button>
+        <button @click="buttonClicked">add filter</button>
 
-        <p>button clicked {{counter}}</p>
+        <div class="v-column__image-container">
 
-        <h3>variable sample</h3>
-        <p>text from parent: {{textFromParent}}</p>
+            <img v-for="imageLink of $arrayOfImageLink"
+                 :src="imageLink"
+                 alt="empty"
+                 class="v-column__image">
 
-        <h3>html from parent with slot vue element:</h3>
+        </div>
+
         <slot></slot>
 
     </section>
@@ -17,26 +19,70 @@
 
 <script lang="ts">
   import {Vue, Component, Prop} from "vue-property-decorator";
+  import {IRootState} from "@/store"
 
     @Component
     export default class Column extends Vue {
 
-      // property sample
-      @Prop({default: "default text"}) textFromParent!: string
+      get $jpegData() {
 
-      // variable sample
-      counter = 0
+        const rootState = this.$store.state as IRootState
+        return rootState.jpegData
+
+      }
+
+      get $arrayOfImageLink(): string[] {
+
+        const arrayToReturn: string[] = []
+
+        if (this.$jpegData) {
+
+          for (const imageName in this.$jpegData) {
+
+            const imageData = this.$jpegData[imageName]
+            arrayToReturn.push(imageData.jpgLink)
+
+          }
+
+        }
+
+        return arrayToReturn
+
+      }
 
       // function sample
       buttonClicked() {
-        this.counter ++
-        let number = 0
+
+        console.log("add filter")
+
       }
     }
 </script>
 
 <style lang="scss" scoped>
     .v-column {
+        box-sizing: border-box;
+        background: lightgrey;
+        border: solid 1px grey;
+        width: 40em;
+        height: 100%;
+        overflow: scroll;
+        padding: 3rem;
+    }
 
+    .v-column__image-container {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .v-column__image {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        height: auto;
+
+        & + & {
+            margin-top: 2rem;
+        }
     }
 </style>
