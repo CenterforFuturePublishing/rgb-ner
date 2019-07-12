@@ -46,8 +46,8 @@ async function getJpegData({publicDirectory}) {
 
                 if(entryPath.isJpegFile()) {
 
-                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].jpgLink = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
-                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].jpgLink = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
+                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].jpgLink = `http://localhost:${PORT_LISTING}/static/${entry}`
+                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].jpgLink = `http://localhost:${PORT_LISTING}/static/${entry}`
 
                 } else if(entryPath.isJsonFile()) {
 
@@ -55,8 +55,8 @@ async function getJpegData({publicDirectory}) {
 
                     const jsonData = JSON.parse(data)
 
-                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].data    = await jsonData
-                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].data    = await jsonData
+                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].metadata    = await jsonData
+                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].metadata    = await jsonData
 
 
                 }
