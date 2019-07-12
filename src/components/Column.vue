@@ -21,43 +21,48 @@
 <script lang="ts">
   import {Vue, Component, Prop} from "vue-property-decorator";
   import {IRootState} from "@/store"
+  import FilterNumber from "@/components/FilterNumber.vue"
 
-    @Component
-    export default class Column extends Vue {
+  @Component({
+    components: {FilterNumber}
+  })
+  export default class Column extends Vue {
 
-      get $jpegData() {
 
-        const rootState = this.$store.state as IRootState
-        return rootState.jpegData
 
-      }
+    get $jpegData() {
 
-      get $arrayOfImageLink(): string[] {
+      const rootState = this.$store.state as IRootState
+      return rootState.jpegData
 
-        const arrayToReturn: string[] = []
+    }
 
-        if (this.$jpegData) {
+    get $arrayOfImageLink(): string[] {
 
-          for (const imageName in this.$jpegData) {
+      const arrayToReturn: string[] = []
 
-            const imageData = this.$jpegData[imageName]
-            arrayToReturn.push(imageData.jpgLink)
+      if (this.$jpegData) {
 
-          }
+        for (const imageName in this.$jpegData) {
+
+          const imageData = this.$jpegData[imageName]
+          arrayToReturn.push(imageData.jpgLink)
 
         }
 
-        return arrayToReturn
-
       }
 
-      // function sample
-      addFilter() {
+      return arrayToReturn
 
-        console.log("add filter")
-
-      }
     }
+
+    // function sample
+    addFilter() {
+
+      console.log("add filter")
+
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
