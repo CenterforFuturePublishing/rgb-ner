@@ -28,11 +28,12 @@ app.listen(3000, () => {
  * @param {string} publicDirectory
  */
 async function getJpegData({publicDirectory}) {
-    let listOfJpegData = {}
+    let listOfJpegData = await {}
 
     const entries = await fs.readdir(publicDirectory)
 
     for(const entry of entries) {
+
         if(! entry.startsWith(".")) {
 
             const entryPath = publicDirectory + "/" + entry
@@ -45,22 +46,27 @@ async function getJpegData({publicDirectory}) {
 
                 if(entryPath.isJpegFile()) {
 
-                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].jpgLink   = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
-                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].jpgLink   = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
+                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].jpgLink = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
+                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].jpgLink = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
 
                 } else if(entryPath.isJsonFile()) {
 
-                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].dataLink  = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
-                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].dataLink  = `http:/localhost:${PORT_LISTING}/static/${propertyName}`
+                    const data = await fs.readFile(entryPath, "utf-8")
+
+                    const jsonData = JSON.parse(data)
+
+                    if( listOfJpegData.hasOwnProperty(propertyName) )  listOfJpegData[propertyName].data    = await jsonData
+                    else            listOfJpegData[propertyName] = {}; listOfJpegData[propertyName].data    = await jsonData
+
 
                 }
             }
 
-            console.log(entryStats)
-            console.log(entryPath.isJpegFile())
-            console.log(entryPath.isJsonFile())
         }
     }
+
+
+
     return listOfJpegData
 }
 
