@@ -3,7 +3,7 @@
 
     <main class="v-container">
 
-      <column>  <p>HULK</p>  </column>
+      <column></column>
 
     </main>
 
