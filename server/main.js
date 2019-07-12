@@ -12,10 +12,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/static', express.static('public'));
+app.use('/static', express.static('public/data'));
 
 app.get("/info", (req, res) => {
-    getJpegData({publicDirectory: "public"}).then((listOfJpegData) => {
+    getJpegData({publicDirectory: "public/data"}).then((listOfJpegData) => {
         res.json(listOfJpegData)
     })
 })

@@ -6,6 +6,7 @@
         <div class="v-column__image-container">
 
             <img v-for="imageLink of $arrayOfImageLink"
+                 :key="imageLink.id"
                  :src="imageLink"
                  alt="empty"
                  class="v-column__image">
