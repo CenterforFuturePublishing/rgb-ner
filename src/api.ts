@@ -6,12 +6,14 @@ export interface IApi {
   [key: string]: {
 
     jpgLink:  string
-    metadata: {
-      [parameterName: string]: string[] | number
-    }
+    metadata: IJpgMetadata
 
   }
 
+}
+
+export interface IJpgMetadata {
+  [parameterName: string]: string[] | number
 }
 
 export async function getJpegData() {
@@ -20,3 +22,11 @@ export async function getJpegData() {
     return response.data as IApi
 
 }
+
+export type ListOfJpgMetadata = {[jpgName: string]: IJpgMetadata}
+
+export interface IFilterOption{
+  [filterName: string]: FilterType
+}
+
+export type FilterType = "string parameter" | "number parameter"
