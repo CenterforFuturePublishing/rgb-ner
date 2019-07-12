@@ -1,7 +1,7 @@
 <template>
     <section class="v-column">
 
-        <button @click="buttonClicked">add filter</button>
+        <button @click="addFilter">add filter</button>
 
         <div class="v-column__image-container">
 
@@ -52,7 +52,7 @@
       }
 
       // function sample
-      buttonClicked() {
+      addFilter() {
 
         console.log("add filter")
 
